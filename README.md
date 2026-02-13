@@ -89,6 +89,32 @@ From the root directory:
 
 ------------------------------------------------------------------------
 
+# 🖱 UI Behavior
+
+## Folder Toggle Direction
+
+- When a folder is collapsed, the toggle icon points **to the right (▶)**.
+- When the folder is expanded, the toggle icon points **downward (▼)**.
+- Clicking the toggle icon switches between these two states.
+
+## Interaction Details
+
+- The toggle icon visually indicates the folder state.
+- When expanded:
+  - Subfolders become visible below the parent folder.
+  - The toggle icon rotates or changes to downward.
+- When collapsed:
+  - Subfolders are hidden.
+  - The toggle icon changes back to right direction.
+
+## State Management
+
+- Each folder maintains its own `isOpen` state.
+- Vue 3 reactivity automatically updates the UI when `isOpen` changes.
+- Nested folders follow the same toggle behavior recursively.
+
+------------------------------------------------------------------------
+
 # 🧠 Backend Stack
 
 -   Elysia (HTTP Server)
