@@ -1,0 +1,22 @@
+{
+  "name": "windows-explorer-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"bun run dev:backend\" \"bun run dev:frontend\"",
+    "dev:backend": "cd packages/backend && bun run dev",
+    "dev:frontend": "cd packages/frontend && bun run dev",
+    "db:generate": "cd packages/backend && bun run db:generate",
+    "db:push": "cd packages/backend && bun run db:push",
+    "db:seed": "cd packages/backend && bun run db:seed",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
