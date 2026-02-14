@@ -81,6 +81,18 @@ Install dependencies:
 
 ------------------------------------------------------------------------
 
+## 3️⃣ Install Root Dependencies
+
+Return to the project root directory:
+
+    cd ../..
+
+Install root dependencies:
+
+    bun install
+
+------------------------------------------------------------------------
+
 # ▶️ Run Development Server
 
 From the root directory:
