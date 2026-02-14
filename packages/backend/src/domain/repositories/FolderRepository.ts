@@ -7,4 +7,6 @@ export interface FolderRepository {
   findSubfolders(folderId: string): Promise<Folder[]>;
   findFiles(folderId: string): Promise<File[]>;
   findFolderWithContents(folderId: string): Promise<{ folder: Folder; subfolders: Folder[]; files: File[] } | null>;
+  searchFolders(query: string): Promise<Folder[]>;
+  searchFiles(query: string): Promise<File[]>;
 }

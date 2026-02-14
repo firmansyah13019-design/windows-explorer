@@ -36,6 +36,27 @@ export const folderController = new Elysia({ prefix: '/api/v1/folders' })
       };
     }
   })
+  .get('/search/:query', async ({ params: { query } }) => {
+    try {
+      console.log('Search request for query:', query);
+      const results = await folderService.search(query);
+      console.log('Search results:', results);
+      return {
+        success: true,
+        data: results
+      };
+    } catch (error) {
+      console.error('Search error:', error);
+      return {
+        success: false,
+        error: 'Failed to search folders and files'
+      };
+    }
+  }, {
+    params: t.Object({
+      query: t.String()
+    })
+  })
   .get('/:id/contents', async ({ params: { id } }) => {
     try {
       const contents = await folderService.getFolderContents(id);

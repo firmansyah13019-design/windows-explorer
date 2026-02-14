@@ -78,6 +78,52 @@ export class PrismaFolderRepository implements FolderRepository {
     };
   }
 
+  async searchFolders(query: string): Promise<Folder[]> {
+    const folders = await this.prisma.folder.findMany({
+      where: {
+        name: {
+          contains: query,
+          mode: 'insensitive'
+        }
+      },
+      orderBy: { name: 'asc' }
+    });
+    
+    return folders.map(f => this.mapToDomain(f));
+  }
+
+  async searchFiles(query: string): Promise<File[]> {
+    const files = await this.prisma.file.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              contains: query,
+              mode: 'insensitive'
+            }
+          },
+          {
+            extension: {
+              contains: query,
+              mode: 'insensitive'
+            }
+          }
+        ]
+      },
+      orderBy: { name: 'asc' }
+    });
+    
+    return files.map(f => new File(
+      f.id,
+      f.name,
+      f.extension,
+      f.size,
+      f.folderId,
+      f.createdAt,
+      f.updatedAt
+    ));
+  }
+
   private mapToDomain(prismaFolder: any): Folder {
     return new Folder(
       prismaFolder.id,

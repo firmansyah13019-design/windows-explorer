@@ -22,6 +22,17 @@ export class FolderService {
         return this.buildHierarchy(folders);
     }
 
+    async search(query: string): Promise<{
+        folders: Folder[];
+        files: File[];
+    }> {
+        const [folders, files] = await Promise.all([
+            this.folderRepository.searchFolders(query),
+            this.folderRepository.searchFiles(query)
+        ]);
+        return { folders, files };
+    }
+
     private buildHierarchy(folders: Folder[]): Folder[] {
         const folderMap = new Map<string, Folder>();
         const rootFolders: Folder[] = [];
